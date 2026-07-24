@@ -21,7 +21,7 @@ async def on_message(message):
     if message.author.bot:
         return
 
-    bot_logic.registrar_actividad(
+    bot_logic.activity(
         user_id=str(message.author.id),
         username=message.author.name,
         accion="message",
@@ -36,42 +36,42 @@ async def meeting(ctx):
     user_id = str(ctx.author.id)
     username = ctx.author.name
 
-    bot_logic.registrar_actividad(
+    bot_logic.activity(
         user_id=user_id, username=username, accion="command"
     )
 
-    datos = bot_logic.obtener_datos_usuario(user_id)
+    data = bot_logic.get_user_data(user_id)
 
-    if not datos:
+    if not data:
         await ctx.send("We couldn't get user data from backend...")
         return
 
-    mensajes = datos.get("messages_sent", 0)
-    comandos = datos.get("commands_used", 0)
+    message = data.get("messages_sent", 0)
+    comands = data.get("commands_used", 0)
 
     await ctx.send(
         f"We are checking **{username}** past...\n"
         "──────────────────────────────────"
     )
 
-    opinion_social = bot_logic.evaluar_comportamiento_social(mensajes)
+    anno_nion = bot_logic.annoyed(message)
     await ctx.send(
-        f"**AnnoyinBot:** I checked your {mensajes} total messages.\n"
-        f"> *\"{opinion_social}\"*"
+        f"**1:** I checked your {message} total messages.\n"
+        f"> *\"{anno_nion}\"*"
     )
 
-    opinion_tecnica = bot_logic.evaluar_comportamiento_tecnico(comandos)
+    eco_opinion = bot_logic.ecosystem(comands)
     await ctx.send(
-        f"**HelpeRBoT:** You used {comandos} of them in total.\n"
-        f"> *\"{opinion_tecnica}\"*"
+        f"**2:** You used {comands} of them in total.\n"
+        f"> *\"{eco_opinion}\"*"
     )
 
-    opinion_analitica = bot_logic.evaluar_comportamiento_analitico(
-        mensajes, comandos
+    list_opinion = bot_logic.list(
+        message, comands
     )
     await ctx.send(
-        f"**ListBot:** Based on your helping...\n"
-        f"> *\"{opinion_analitica}\"*"
+        f"**3:** Based on your helping...\n"
+        f"> *\"{list_opinion}\"*"
     )
 
 
