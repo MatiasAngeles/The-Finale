@@ -1,1 +1,58 @@
+import requests
+from settings import API_URL
 
+
+def registrar_actividad(user_id: str, username: str, accion: str) -> bool:
+    """Registers the message/command activity into the backend."""
+    payload = {"username": username, "action_type": accion}
+    try:
+        response = requests.post(
+            f"{API_URL}/users/{user_id}/activity", json=payload, timeout=5
+        )
+        return response.status_code == 200
+    except requests.exceptions.RequestException as error:
+        print(f"API has failed because: {error}")
+        return False
+
+
+def obtener_datos_usuario(user_id: str) -> dict:
+    """Gets the user activity from the server."""
+    try:
+        response = requests.get(f"{API_URL}/users/{user_id}", timeout=5)
+        if response.status_code == 200:
+            return response.json()
+    except requests.exceptions.RequestException as error:
+        print(f"API has failed because: {error}")
+    return {}
+
+
+def evaluar_comportamiento_social(mensajes: int) -> str:
+    """AnnoyinBot"""
+    if mensajes > 50:
+        return "I just want peace, not commands."
+    if mensajes > 15:
+        return "Yes I'm fine, I just don't want the user to talk to me."
+    return "I don't want to do what the user needs..."
+
+
+def evaluar_comportamiento_tecnico(comandos: int) -> str:
+    """HelpeRBoT"""
+    if comandos > 10:
+        return "Now the user knows about the ecosystem!"
+    if comandos > 2:
+        return "The user knows a little bit, needs to know more!"
+    return "The user needs to know about the ecosystem!"
+
+
+def evaluar_comportamiento_analitico(mensajes: int, comandos: int) -> str:
+    """ListyBot"""
+    total = mensajes + comandos
+    if total == 0:
+        return "I guess the user is not necesarry for it."
+
+    ratio = comandos / total
+    if ratio > 0.4:
+        return "The user"
+    if mensajes > 30:
+        return "Chatty profile detected. Low command-to-message ratio."
+    return "Standard user profile. Activity levels are nominal."
