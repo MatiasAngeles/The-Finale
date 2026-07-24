@@ -27,33 +27,33 @@ def get_user_data(user_id: str) -> dict:
 
 
 def annoyed(message: int) -> str:
-    """AnnoyinBot"""
+    """1"""
     if message > 50:
-        return "I just want peace, not commands."
+        return "text."
     if message > 15:
-        return "Yes I'm fine, I just don't want the user to talk to me."
-    return "I don't want to do what the user needs..."
+        return "text"
+    return "text"
 
 
 def ecosystem(comands: int) -> str:
-    """HelpeRBoT"""
+    """2"""
     if comands > 10:
-        return "Now the user knows about the ecosystem!"
+        return "text"
     if comands > 2:
-        return "The user knows a little bit, needs to know more!"
-    return "The user needs to know about the ecosystem!"
+        return "text"
+    return "text"
 
 
 def list(message: int, comands: int) -> str:
-    """ListyBot"""
+    """3"""
     total = message + comands
     if total == 0:
-        return "I guess the user is not necesarry for it."
+        return "text"
 
     ratio = comands / total
     if ratio > 0.4:
         return "The user"
     if message > 30:
-        return "Chatty profile detected. Low command-to-message ratio."
-    return "Standard user profile. Activity levels are nominal."
+        return "text"
+    return "text."
     
