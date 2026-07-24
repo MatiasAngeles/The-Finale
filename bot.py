@@ -54,24 +54,24 @@ async def meeting(ctx):
         "──────────────────────────────────"
     )
 
-    anno_nion = bot_logic.annoyed(message)
+    first = bot_logic.annoyed(message)
     await ctx.send(
-        f"**1:** I checked your {message} total messages.\n"
-        f"> *\"{anno_nion}\"*"
+        f"**1:**{message}\n"
+        f"> *\"{first}\"*"
     )
 
-    eco_opinion = bot_logic.ecosystem(comands)
+    second = bot_logic.ecosystem(comands)
     await ctx.send(
-        f"**2:** You used {comands} of them in total.\n"
-        f"> *\"{eco_opinion}\"*"
+        f"**2:**{comands}\n"
+        f"> *\"{second}\"*"
     )
 
-    list_opinion = bot_logic.list(
+    third = bot_logic.list(
         message, comands
     )
     await ctx.send(
-        f"**3:** Based on your helping...\n"
-        f"> *\"{list_opinion}\"*"
+        f"**3:** a \n"
+        f"> *\"{third}\"*"
     )
 
 
